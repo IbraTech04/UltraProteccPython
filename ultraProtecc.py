@@ -11,7 +11,7 @@ try:
     totalAsciiVal = 0
     for x in productOwner:
         totalAsciiVal += ord(x)
-    ##If hte key is OEM:
+    ##If the key is OEM:
     if splitKey[1] == "OEM":
         print("key is OEM key")
         print("most likely preinstalled software")
@@ -29,13 +29,13 @@ try:
             filename, headers = urllib.request.urlretrieve(url, filename="./keys.txt")
             f = open("keys.txt", "r")
             final = f.read()
-            print(final)
             for i in final:
                 if (i in keyToCheck):
                     
                     print("serverside passed")
                     break
-
+        else:
+            print("key is not valid")
     elif splitKey[1] == "TRL":
         print("key is trial key")
 
