@@ -1,6 +1,11 @@
 import urllib.request
+import datetime
+import traceback
 
-print("TMUltraProtecc Key Validator")
+today = datetime.datetime.now()
+
+
+print("UltraProtecc Key Validator")
 keyToCheck = input("Please enter the key you would like to validate: ")
 productOwner = input("Please enter the username attached to this key: ")
 
@@ -31,14 +36,25 @@ try:
             final = f.read()
             for i in final:
                 if (i in keyToCheck):
-                    
                     print("serverside passed")
                     break
         else:
             print("key is not valid")
     elif splitKey[1] == "TRL":
         print("key is trial key")
+        day = splitKey[0][:3]
+        year = splitKey[0][3:]
+        yearActual = today.year
+        if ("20" + year == str(today.year)):
+            day_of_year = today.timetuple().tm_yday  
+            if (day_of_year - int(day) < 30):
+                print("Key is Valid")
+                print("key has ", int(day) + 30 - day_of_year , "Days left")
+            else:
+                print("key is expired")
 
+        else:
+            print("key is expired")
 
     elif splitKey[1] == "RTL":
         print("key is retail key")
@@ -46,3 +62,5 @@ try:
 
 except:
     print("invalid key intered")
+    traceback.print_exc()
+
